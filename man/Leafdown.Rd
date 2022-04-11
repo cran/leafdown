@@ -74,8 +74,7 @@ the metadata and (if available) the corresponding values of all currently select
 
 \item{\code{curr_map_level}}{Index of the current map level.
 This corresponds to the position of the shapes in the \code{spdfs_list}.
-(i.e The highest-level is 1, the next is 2 and so on...).
-At the moment only two map levels are possible.}
+(i.e The highest-level is 1, the next is 2 and so on...).}
 
 \item{\code{curr_poly_ids}}{The ids of all polygons of the current map level.}
 }
@@ -86,6 +85,7 @@ At the moment only two map levels are possible.}
 \itemize{
 \item \href{#method-new}{\code{Leafdown$new()}}
 \item \href{#method-draw_leafdown}{\code{Leafdown$draw_leafdown()}}
+\item \href{#method-keep_zoom}{\code{Leafdown$keep_zoom()}}
 \item \href{#method-add_data}{\code{Leafdown$add_data()}}
 \item \href{#method-drill_down}{\code{Leafdown$drill_down()}}
 \item \href{#method-drill_up}{\code{Leafdown$drill_up()}}
@@ -99,12 +99,7 @@ At the moment only two map levels are possible.}
 \subsection{Method \code{new()}}{
 Initializes the leafdown object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Leafdown$new(
-  spdfs_list,
-  map_output_id,
-  input,
-  join_map_levels_by = c(GID_1 = "GID_1")
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Leafdown$new(spdfs_list, map_output_id, input, join_map_levels_by = NULL)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -117,7 +112,12 @@ Used to observe for _shape_click events.}
 
 \item{\code{input}}{The \code{input} from the shiny app.}
 
-\item{\code{join_map_levels_by}}{A named vector with the columns by which the map levels should be joined.}
+\item{\code{join_map_levels_by}}{A named vector of length \code{length(spdfs_list) - 1} with the columns by which the map
+levels should be joined. The first element defines how the first and second map levels should be joined, the second
+element does the same for the second and third map levels and so on. The name of an element defines the name of
+the join column in the upper map level and the actual element the join column of the lower map level.
+By default this is set to c("GID_0" = "GID_0", "GID_1" = "GID_1", ..., "GID_n" = "GID_n"),
+where n is \code{length(spdfs_list) - 1}.}
 }
 \if{html}{\out{</div>}}
 }
@@ -135,6 +135,25 @@ Draws the leaflet map on the current map level. All unselected parents will be d
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{...}}{Additional arguments given to \code{leaflet::addPolygons}}
+}
+\if{html}{\out{</div>}}
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-keep_zoom"></a>}}
+\if{latex}{\out{\hypertarget{method-keep_zoom}{}}}
+\subsection{Method \code{keep_zoom()}}{
+Keeps the zoom after \code{drill_down} and \code{drill_up} events.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{Leafdown$keep_zoom(map, input)}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{map}}{the map output from \code{draw_leafdown}}
+
+\item{\code{input}}{the input object from the shiny app}
 }
 \if{html}{\out{</div>}}
 }

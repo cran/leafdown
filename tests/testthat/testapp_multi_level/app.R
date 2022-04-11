@@ -18,12 +18,16 @@ ui <- shiny::fluidPage(
 
 # Define server for leafdown app
 server <- function(input, output) {
-  states <- readRDS("../res/usa1.RDS")
-  names(states)[names(states) == "GID_1"] <- "MATCH1"
-  states2 <- readRDS("../res/usa2.RDS")
-  names(states2)[names(states2) == "GID_1"] <- "MATCH2"
-  spdfs_list <- list(states, states2)
-  my_leafdown <- leafdown::Leafdown$new(spdfs_list, "leafdown", input, join_map_levels_by = c("MATCH1" = "MATCH2"))
+  us0 <- readRDS("../res/usa0.RDS")
+  us1 <- readRDS("../res/usa1.RDS")
+  us2 <- readRDS("../res/usa2.RDS")
+  ger0 <- readRDS("../res/ger0-0005.RDS")
+  ger1 <- readRDS("../res/ger1-0005.RDS")
+  ger2 <- readRDS("../res/ger2-005.RDS")
+
+  spdfs_list <- list(raster::union(us0, ger0), raster::union(us1, ger1), raster::union(us2, ger2))
+
+  my_leafdown <- Leafdown$new(spdfs_list, "leafdown", input, join_map_levels_by = c("GID_0" = "GID_0", "GID_1" = "GID_1"))
   eval_draw <- NULL
   rv <- reactiveValues()
   rv$update_leafdown <- 0
@@ -50,7 +54,7 @@ server <- function(input, output) {
     my_leafdown$add_data(data)
     # input$args_leaflet is used for testing arguments in $draw_leafdown and
     # explicitly defined in the specific test
-    if(!is.null(input[["args_leaflet"]])){
+    if (!is.null(input[["args_leaflet"]])) {
       # potential warning message from $draw_leafdown
       eval_draw <<- testthat::capture_warning({
         do.call(my_leafdown$draw_leafdown, input$args_leaflet)

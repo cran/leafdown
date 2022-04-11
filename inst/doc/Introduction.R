@@ -12,11 +12,14 @@ library(leafdown)
 library(leaflet)
 library(shiny)
 library(dplyr)
+library(shinycssloaders)
 library(shinyjs)
+library(dplyr)
+library(raster)
 
 ## ---- echo=FALSE--------------------------------------------------------------
-ger1 <- readRDS("../inst/extdata/ger1-005.R")
-ger2 <- readRDS("../inst/extdata/ger2-005.R")
+ger1 <- readRDS("../inst/extdata/ger1-005.RDS")
+ger2 <- readRDS("../inst/extdata/ger2-005.RDS")
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #  ger1 <- raster::getData(country = "Germany", level = 1)
@@ -122,13 +125,13 @@ print(head(my_leafdown$curr_data))
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #  map <- my_leafdown$draw_leafdown(
-#    fillColor = ~ colorNumeric("Blues", GDP_2014)(GDP_2014)
+#    fillColor = ~ colorNumeric("Greens", GDP_2014)(GDP_2014)
 #  )
 
 ## ---- eval=FALSE--------------------------------------------------------------
 #  map <- map %>%
 #    addLegend(
-#      pal = colorNumeric("Blues", data$GDP_2014),
+#      pal = colorNumeric("Grees", data$GDP_2014),
 #      values = data$GDP_2014
 #    )
 
@@ -193,6 +196,9 @@ new_data <- metadata %>% left_join(gdp_2014_federal_states, by = c("NAME_1" = "F
 #  )
 
 ## ---- eval=FALSE--------------------------------------------------------------
+#  map <- my_leafdown$keep_zoom(map, input)
+
+## ---- eval=FALSE--------------------------------------------------------------
 #  library(leafdown)
 #  library(leaflet)
 #  library(shiny)
@@ -255,10 +261,11 @@ create_labels <- function(data, map_level) {
 #      my_leafdown$add_data(data)
 #      labels <- create_labels(data, curr_map_level)
 #      my_leafdown$draw_leafdown(
-#        fillColor = ~ colorNumeric("Blues", GDP_2014)(GDP_2014),
+#        fillColor = ~ colorNumeric("Greens", GDP_2014)(GDP_2014),
 #        weight = 2, fillOpacity = 0.8, color = "grey", label = labels,
 #        highlight = highlightOptions(weight = 5, color = "#666", fillOpacity = 0.7)
 #      ) %>%
+#        my_leafdown$keep_zoom(input) %>%
 #        addLegend("topright",
 #          pal = colorNumeric("Blues", data$GDP_2014),
 #          values = data$GDP_2014,

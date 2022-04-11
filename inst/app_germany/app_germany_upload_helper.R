@@ -1,7 +1,16 @@
 
 file.copy(list.files("inst/extdata/", full.names = TRUE), "inst/app_germany/")
 rsconnect::deployApp(appDir = "inst/app_germany", appName = "leafdown-basic-example", lint = FALSE,
-                     appPrimaryDoc = "app_germany.R")
-file.remove("inst/app_germany/ger1-005.R")
-file.remove("inst/app_germany/ger2-005.R")
-
+                     appPrimaryDoc = "app_germany.R", account = "andreasho95")
+file.remove("inst/app_germany/ger0-005.RDS")
+file.remove("inst/app_germany/ger1-005.RDS")
+file.remove("inst/app_germany/ger2-005.RDS")
+file.remove("inst/app_germany/a0-005.RDS")
+file.remove("inst/app_germany/a1-005.RDS")
+file.remove("inst/app_germany/a2-005.RDS")
+file.remove("inst/app_germany/ch0-005.RDS")
+file.remove("inst/app_germany/ch1-005.RDS")
+file.remove("inst/app_germany/ch2-005.RDS")
+file.remove("inst/app_germany/usa0.RDS")
+file.remove("inst/app_germany/usa1.RDS")
+file.remove("inst/app_germany/usa2.RDS")

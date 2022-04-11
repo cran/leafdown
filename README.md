@@ -1,14 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# leafdown <a><img src='man/figures/hex-leafdown.png' align="right" height="139" /></a>
+# leafdown <a><img id="leafdown-hex" src='man/figures/hex-leafdown.png' align="right" height="139px" /></a>
 
 <!-- badges: start -->
 
 [![Lifecycle:
 stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
-[![Travis build
-status](https://travis-ci.com/hoga-it/leafdown.svg?branch=master)](https://travis-ci.com/hoga-it/leafdown)
+[![R-CMD-check](https://github.com/hoga-it/leafdown/workflows/R-CMD-check/badge.svg)](https://github.com/hoga-it/leafdown/actions)
 <!-- badges: end -->
 
 The leafdown package provides drilldown functionality for leaflet
@@ -18,11 +17,12 @@ choropleths in R Shiny apps.
 
 ## Installation
 
-<!--You can install the released version of leafdown from [CRAN](https://CRAN.R-project.org) with:
+You can install the released version of leafdown from
+[CRAN](https://CRAN.R-project.org) with:
 
 ``` r
 install.packages("leafdown")
-```-->
+```
 
 You can install the development version from
 [GitHub](https://github.com/) with:
@@ -62,3 +62,15 @@ app](https://pega.shinyapps.io/election16/) and here for the
 <br> <br>
 
 <img src='man/figures/app_election_map.png'/>
+
+## Showcase - healthdown
+
+The healthdown app allows interactive comparison of various health
+factors at the U.S. state and county level. It was honored as “Runners
+up” in the Shiny Contest 2021.
+
+Link to healthdown: <https://hoga.shinyapps.io/healthdown/>.
+
+Code: <https://github.com/hoga-it/healthdown>
+
+<img src='man/figures/healthdown_app.jpg'/>
